@@ -1,5 +1,5 @@
 {
-    "chainName": "base",
+    "chainName": "sphinx",
     "title": "SPHX Block Explorer",
     "extra": {
       "profile": true,

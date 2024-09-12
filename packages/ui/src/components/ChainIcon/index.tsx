@@ -92,11 +92,11 @@ import neutronLogoLight from 'shared-utils/assets/logos/neutron-light.svg?url';
 import jackalLogoDark from 'shared-utils/assets/logos/jackal-dark.svg?url';
 import jackalLogoLight from 'shared-utils/assets/logos/jackal-light.svg?url';
 import archwayLogoDark from 'shared-utils/assets/logos/archway-dark.svg?url';
-import archwayLogoLight from 'shared-utils/assets/logos/archway-light.svg?url';
-import sphinxLogoLight from 'shared-utils/assets/logos/archway-light.svg?url';
-import sphinxLogoDark from 'shared-utils/assets/logos/archway-light.svg?url';
+import archwayLogoLight from 'shared-utils/assets/logos/sphinx-logo.svg?url';
+import sphinxLogoLight from 'shared-utils/assets/logos/sphinx-logo.svg?url';
+import sphinxLogoDark from 'shared-utils/assets/logos/sphinx-logo-white-text.svg?url';
 import archwayIconBoth from 'shared-utils/assets/logos/archway-light.svg?url';
-import sphinxIconBoth from 'shared-utils/assets/logos/archway-light.svg?url';
+import sphinxIconBoth from 'shared-utils/assets/logos/sphinx-logo-white-text.svg?url';
 
 interface IconProps extends Omit<ImageProps, 'id' | 'src'> {
   type: 'icon' | 'logo';
