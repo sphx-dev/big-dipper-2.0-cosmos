@@ -93,3 +93,7 @@ svg {
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.footer {
+  display: none !important;
+}
