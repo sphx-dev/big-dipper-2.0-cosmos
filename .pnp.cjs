@@ -18,8 +18,8 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:apps/web"\
     },\
     {\
-      "name": "web-sphinx",\
-      "reference": "workspace:apps/web-sphinx"\
+      "name": "web-old",\
+      "reference": "workspace:apps/web-old"\
     },\
     {\
       "name": "eslint-config-custom",\
@@ -52,7 +52,7 @@ const RAW_RUNTIME_STATE =
     ["tsconfig", ["workspace:packages/tsconfig"]],\
     ["ui", ["workspace:packages/ui"]],\
     ["web", ["workspace:apps/web"]],\
-    ["web-sphinx", ["workspace:apps/web-sphinx"]]\
+    ["web-old", ["workspace:apps/web-old"]]\
   ],\
   "fallbackPool": [\
   ],\
@@ -20974,11 +20974,11 @@ const RAW_RUNTIME_STATE =
         "linkType": "SOFT"\
       }]\
     ]],\
-    ["web-sphinx", [\
-      ["workspace:apps/web-sphinx", {\
-        "packageLocation": "./apps/web-sphinx/",\
+    ["web-old", [\
+      ["workspace:apps/web-old", {\
+        "packageLocation": "./apps/web-old/",\
         "packageDependencies": [\
-          ["web-sphinx", "workspace:apps/web-sphinx"],\
+          ["web-old", "workspace:apps/web-old"],\
           ["@apollo/client", "virtual:9dce388d82c018b4a7af5edc7243e51f7023d1ab93a923b3959d0066ac6881c93b965a0932486426cbefa96c9c8e47849d5ff541d2404b8aca246480fa32f0d2#npm:3.7.14"],\
           ["@cosmjs/encoding", "npm:0.30.1"],\
           ["@cosmjs/launchpad", "npm:0.27.1"],\
