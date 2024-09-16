@@ -61,6 +61,7 @@
   "errorDetails": "如果您有时间，请将其报告给我们 github <0>{{issue}}</0> 。",
   "errorHome": "点击此处返回主页",
   "maintainBy": "维护 <0>{{name}}</0>",
+  "poweredBy": "Powered By <0>{{name}}</0>",
   "txListFormat": "交易格式",
   "compact": "紧凑",
   "detailed": "详细",

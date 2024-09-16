@@ -61,6 +61,7 @@
   "errorDetails": "Se hai tempo, segnalalo al nostro github all'indirizzo <0>{{issue}}</0> con l'URL che ha causato l'errore.",
   "errorHome": "Clicca qui per tornare alla Home",
   "maintainBy": "Mantenuto da <0>{{name}}</0>",
+  "poweredBy": "Powered By <0>{{name}}</0>",
   "txListFormat": "Formato transazioni",
   "compact": "Compatto",
   "detailed": "Dettagliato",

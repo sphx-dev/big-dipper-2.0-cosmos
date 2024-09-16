@@ -59,6 +59,7 @@
   "errorDetails": "如果您有時間，請將其報告給我們的 Github <0>{{issue}}</0> 使用導致錯誤的網址。",
   "errorHome": "點擊此處返回主頁",
   "maintainBy": "維護者 <0>{{name}}</0>",
+  "poweredBy": "Powered By <0>{{name}}</0>",
   "txListFormat": "交易格式",
   "compact": "簡潔",
   "detailed": "詳細",

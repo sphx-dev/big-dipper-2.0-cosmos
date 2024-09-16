@@ -11,7 +11,7 @@ export const footerLinks = [
     key: 'company',
     links: [
       {
-        key: 'forbole',
+        key: 'sphinx',
         url: FORBOLE_URL,
       },
       {
