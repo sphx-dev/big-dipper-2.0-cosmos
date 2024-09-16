@@ -220,6 +220,10 @@
         "usdc": {
           "display": "usdc",
           "exponent": 6
+        },
+        "stake": {
+          "display": "stake",
+          "exponent": 6
         }
       },
       "endpoints": {
