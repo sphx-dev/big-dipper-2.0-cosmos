@@ -97,3 +97,6 @@ svg {
 .footer {
   display: none !important;
 }
+.MuiBox-root.mui-style-0 {
+  display: none;
+}

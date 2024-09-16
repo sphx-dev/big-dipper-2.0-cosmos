@@ -9,10 +9,7 @@
     "themes": {
       "default": "light",
       "themeList": [
-        "dark",
-        "light",
-        "deuteranopia",
-        "tritanopia"
+        "light"
       ],
       "dark": {
         "primary": {
