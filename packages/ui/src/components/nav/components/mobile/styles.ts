@@ -22,7 +22,7 @@ const useStyles = makeStyles()((theme) => ({
       visibility: 'visible',
     },
     '&.menu': {
-      zIndex: 151,
+      zIndex: 100,
     },
     '&.network': {
       zIndex: 1,
