@@ -3,16 +3,25 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
   root: {
-    [theme.breakpoints.up('lg')]: {
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-    },
+    // [theme.breakpoints.up('lg')]: {
+    display: 'flex',
+    flex: '1 1 auto',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: '100vh',
+    // },
   },
   contentWrapper: {
+    padding: '2rem',
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '840px',
+    },
     [theme.breakpoints.up('lg')]: {
-      display: 'flex',
-      flex: 1,
+      maxWidth: '1140px',
+    },
+    [theme.breakpoints.up(1500)]: {
+      maxWidth: '1440px',
     },
   },
   footer: {
@@ -22,7 +31,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   appBarPlaceholder: {
-    ...(theme.mixins.toolbar as CSSObject),
+    // ...(theme.mixins.toolbar as CSSObject),
   },
   children: {
     flexGrow: 1,

@@ -1,51 +1,5 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"],
-      "env": [
-        "NEXT_PUBLIC_BANNERS_JSON",
-        "NEXT_PUBLIC_COINZILLA_ZONE",
-        "NEXT_PUBLIC_GRAPHQL_URL",
-        "NEXT_PUBLIC_GRAPHQL_WS",
-        "NEXT_PUBLIC_MATOMO_SITE_ID",
-        "NEXT_PUBLIC_MATOMO_URL",
-        "NEXT_PUBLIC_RPC_WEBSOCKET"
-      ]
-    },
-    "clean": {
-      "cache": false,
-      "outputs": []
-    },
-    "dev": {
-      "cache": false,
-      "outputs": [],
-      "persistent": true
-    },
-    "start": {
-      "dependsOn": ["^build"],
-      "env": ["PORT"],
-      "outputs": [],
-      "persistent": true
-    },
-    "ts-check": {
-      "outputs": []
-    },
-    "lint": {
-      "outputs": [".next/cache/eslint/**"]
-    },
-    "test": {
-      "outputs": ["coverage/**"]
-    },
-    "e2e": {
-      "env": ["PORT"],
-      "outputs": []
-    },
-    "graphql:codegen": {
-      "outputs": []
-    }
-  },
   "globalEnv": [
     "BASE_PATH",
     "NEXT_PUBLIC_APP_NAME",
@@ -75,5 +29,66 @@
     ".gitignore",
     ".yarnrc.yml",
     "packages/shared-utils/**/*"
-  ]
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ],
+      "env": [
+        "NEXT_PUBLIC_BANNERS_JSON",
+        "NEXT_PUBLIC_COINZILLA_ZONE",
+        "NEXT_PUBLIC_GRAPHQL_URL",
+        "NEXT_PUBLIC_GRAPHQL_WS",
+        "NEXT_PUBLIC_MATOMO_SITE_ID",
+        "NEXT_PUBLIC_MATOMO_URL",
+        "NEXT_PUBLIC_RPC_WEBSOCKET"
+      ]
+    },
+    "clean": {
+      "cache": false,
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "outputs": [],
+      "persistent": true
+    },
+    "start": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "PORT"
+      ],
+      "outputs": [],
+      "persistent": true
+    },
+    "ts-check": {
+      "outputs": []
+    },
+    "lint": {
+      "outputs": [
+        ".next/cache/eslint/**"
+      ]
+    },
+    "test": {
+      "outputs": [
+        "coverage/**"
+      ]
+    },
+    "e2e": {
+      "env": [
+        "PORT"
+      ],
+      "outputs": []
+    },
+    "graphql:codegen": {
+      "outputs": []
+    }
+  }
 }

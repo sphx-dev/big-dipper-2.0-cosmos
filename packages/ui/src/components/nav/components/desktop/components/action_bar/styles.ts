@@ -12,13 +12,13 @@ const useStyles = makeStyles()((theme) => ({
   actions: {
     width: '100%',
     display: 'flex',
+    gap: theme.spacing(2),
     alignItems: 'center',
     justifyContent: 'flex-end',
     zIndex: 5000,
   },
   searchBar: {
     flex: 1,
-    marginRight: theme.spacing(2),
     '&.open': {
       '& .MuiInputBase-root': {
         background: theme.palette.background.default,
@@ -26,14 +26,11 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   network: {
-    marginRight: theme.spacing(2),
     '&.open': {
       background: theme.palette.background.default,
     },
   },
-  toggle: {
-    marginRight: theme.spacing(2),
-  },
+  toggle: {},
   networkList: {
     width: '100%',
     zIndex: 1201,

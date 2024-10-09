@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getMenuItems } from '@/components/nav/components/menu_items/utils';
 import useStyles from '@/components/nav/components/menu_items/styles';
+import { Toolbar } from '@mui/material';
 
 const MenuItems = () => {
   const { classes, cx } = useStyles();
@@ -15,7 +16,7 @@ const MenuItems = () => {
   const items = getMenuItems();
 
   return (
-    <List>
+    <Toolbar className={classes.toolbar}>
       {items?.map((x) => {
         let isActive = false;
         if (x.url === router?.asPath) {
@@ -26,20 +27,20 @@ const MenuItems = () => {
         }
 
         return (
-          <Link shallow key={x.key} href={x.url} legacyBehavior passHref>
-            <ListItemButton
-              className={cx(classes.root, {
-                active: isActive,
-              })}
-              component="a"
-            >
-              <ListItemIcon>{x.icon}</ListItemIcon>
-              <ListItemText className={classes.listItemText} primary={t(x.key)} />
-            </ListItemButton>
-          </Link>
+          <ListItemButton
+            key={x.key}
+            href={x.url}
+            className={cx(classes.root, {
+              active: isActive,
+            })}
+            component="a"
+          >
+            {/* <ListItemIcon>{x.icon}</ListItemIcon> */}
+            <ListItemText className={classes.listItemText} primary={t(x.key)} />
+          </ListItemButton>
         );
       })}
-    </List>
+    </Toolbar>
   );
 };
 
