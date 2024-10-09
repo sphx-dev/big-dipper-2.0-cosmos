@@ -7,6 +7,7 @@ const useStyles = makeStyles()((theme) => ({
       background: theme.palette.background.paper,
       padding: theme.spacing(0.4, 1.2),
       borderRadius: theme.shape.borderRadius,
+      boxShadow: '0 4px 16px #0000001a',
     },
     '& .MuiInputBase-input': {
       textOverflow: 'ellipsis',

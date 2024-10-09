@@ -5,12 +5,10 @@ const useStyles = makeStyles()((theme) => ({
     display: 'grid',
     gap: theme.spacing(1),
     gridTemplateRows: 'auto',
-    [theme.breakpoints.up('sm')]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
-    [theme.breakpoints.up('lg')]: {
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    [theme.breakpoints.up('md')]: {
       gap: theme.spacing(2),
-      gridTemplateColumns: 'repeat(4, 1fr)',
+      gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
   blockHeight: {

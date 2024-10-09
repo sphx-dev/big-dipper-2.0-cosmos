@@ -12,8 +12,9 @@ const Nav: FC<NavProps> = ({ title }) => {
 
   return (
     <>
-      <Desktop className={display.hiddenUntilLg} title={title ?? ''} />
-      <Mobile className={display.hiddenWhenLg} title={title ?? ''} />
+      <Desktop title={title ?? ''} />
+      {/* <Desktop className={display.hiddenUntilLg} title={title ?? ''} /> */}
+      {/* <Mobile className={display.hiddenWhenLg} title={title ?? ''} /> */}
     </>
   );
 };

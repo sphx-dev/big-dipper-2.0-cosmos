@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import useAppTranslation from '@/hooks/useAppTranslation';
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
-import ChainIcon from '@/components/ChainIcon';
+// import ChainIcon from '@/components/ChainIcon';
 import useStyles from '@/components/nav/components/title_bar/styles';
 import { formatMarket } from '@/components/nav/components/title_bar/utils';
 import { readMarket } from '@/recoil/market';
@@ -18,12 +18,18 @@ const TitleBar: FC<TitleBarProps> = ({ className, title }) => {
   const marketState = useRecoilValue(readMarket);
 
   const market = formatMarket(marketState);
+  let styleObject: any = {
+    gap: !!title ? '2rem' : '0',
+  };
+  if (!title) {
+    styleObject.padding = '0 !important';
+  }
 
   return (
-    <div className={cx(classes.root, className)}>
+    <div className={cx(classes.root, className)} style={styleObject}>
       {/*{!title && <ChainIcon type="logo" className={classes.logo} alt="logo" />}*/}
       {!!title && <Typography variant="h1">{title}</Typography>}
-      <div className={classes.content}>
+      {/* <div className={classes.content}>
         {market.map((x) => (
           <div key={x.key} className={classes.item}>
             <Typography variant="body1" className="label">
@@ -32,7 +38,7 @@ const TitleBar: FC<TitleBarProps> = ({ className, title }) => {
             <Typography variant="body1">{x.data}</Typography>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

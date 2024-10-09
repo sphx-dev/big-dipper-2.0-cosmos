@@ -23,33 +23,8 @@ const Desktop: FC<DesktopProps> = ({ className, title }) => {
   const { isMenu, toggleMenu, turnOffAll, toggleNetwork, isNetwork } = useDesktop();
   return (
     <ClickAwayListener onClickAway={turnOffAll}>
-      <div className={cx(classes.root, className)}>
-        <AppBar
-          position="fixed"
-          className={cx(classes.appBar, {
-            open: isMenu,
-          })}
-        >
-          <ActionBar toggleNetwork={toggleNetwork} isNetwork={isNetwork} />
-          <TitleBar title={title} />
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          className={cx(classes.drawer, {
-            open: isMenu,
-            closed: !isMenu,
-            [classes.drawerOpen]: isMenu,
-            [classes.drawerClose]: !isMenu,
-          })}
-          classes={{
-            paper: cx({
-              open: isMenu,
-              closed: !isMenu,
-              [classes.drawerOpen]: isMenu,
-              [classes.drawerClose]: !isMenu,
-            }),
-          }}
-        >
+      <AppBar position="relative" className={cx(classes.appBar)}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {theme === 'light' ? (
             <BigDipperLogoRed
               className={classes.logo}
@@ -66,8 +41,10 @@ const Desktop: FC<DesktopProps> = ({ className, title }) => {
             />
           )}
           <MenuItems />
-        </Drawer>
-      </div>
+        </div>
+        <ActionBar toggleNetwork={toggleNetwork} isNetwork={isNetwork} />
+        <TitleBar title={title} />
+      </AppBar>
     </ClickAwayListener>
   );
 };

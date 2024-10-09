@@ -110,7 +110,7 @@
         "contrastText": "#FFFFFF"
       },
       "background": {
-        "default": "#F8F8F8",
+        "default": "#F2F2F2",
         "paper": "#FFFFFF"
       },
       "divider": "#E8E8E8",
@@ -120,16 +120,16 @@
       },
       "custom": {
         "general": {
-          "background": "#F8F8F8",
+          "background": "#F2F2F2",
           "surfaceOne": "#FFFFFF",
-          "surfaceTwo": "#F8F8F8",
-          "icon": "#999999"
+          "surfaceTwo": "#F2F2F2",
+          "icon": "#444"
         },
         "fonts": {
           "fontOne": "#000000",
           "fontTwo": "#414141",
           "fontThree": "#777777",
-          "fontFour": "#999999",
+          "fontFour": "#444",
           "fontFive": "#FFFFFF",
           "highlight": "#137dbe"
         },

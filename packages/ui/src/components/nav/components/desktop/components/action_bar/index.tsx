@@ -1,11 +1,11 @@
 // import ConnectWallet from '@/components/nav/components/connect_wallet';
-import Network from '@/components/nav/components/desktop/components/action_bar/components/network';
-import NetworkList from '@/components/nav/components/desktop/components/action_bar/components/network_list';
-import SettingsList from '@/components/nav/components/desktop/components/action_bar/components/settings_list';
+// import Network from '@/components/nav/components/desktop/components/action_bar/components/network';
+// import NetworkList from '@/components/nav/components/desktop/components/action_bar/components/network_list';
+// import SettingsList from '@/components/nav/components/desktop/components/action_bar/components/settings_list';
 import useStyles from '@/components/nav/components/desktop/components/action_bar/styles';
 import SearchBar from '@/components/nav/components/search_bar';
 // import WalletDetails from '@/components/nav/components/wallet_details';
-import ThemeToggle from '@/components/nav/components/theme_toggle';
+// import ThemeToggle from '@/components/nav/components/theme_toggle';
 import { useGetComponentDimension } from '@/hooks/use_get_component_dimension';
 import { FC } from 'react';
 
@@ -22,21 +22,21 @@ const ActionBar: FC<ActionBarProps> = ({ toggleNetwork, className, isNetwork }) 
     <div className={cx(classes.root, className)} ref={heightRef}>
       <div className={classes.actions}>
         <SearchBar className={cx(classes.searchBar, { open: isNetwork })} />
-        <Network
+        {/* <Network
           className={cx(classes.network, { open: isNetwork })}
           toggleNetwork={toggleNetwork}
-        />
+        /> */}
         {/* <WalletDetails /> */}
-        <ThemeToggle className={classes.toggle} />
-        <SettingsList />
+        {/* <ThemeToggle className={classes.toggle} /> */}
+        {/* <SettingsList /> */}
         {/* <ConnectWallet /> */}
       </div>
-      <NetworkList
+      {/* <NetworkList
         actionHeight={height}
         className={cx(classes.networkList, {
           open: isNetwork,
         })}
-      />
+      /> */}
     </div>
   );
 };
