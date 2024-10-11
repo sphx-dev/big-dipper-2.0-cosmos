@@ -1,11 +1,5 @@
 import { ReactNode } from 'react';
-import {
-  DiscordIcon,
-  GithubIcon,
-  LinkedinIcon,
-  TelegramIcon,
-  TwitterIcon,
-} from '@/components/icons';
+import { DiscordIcon, LinkedinIcon, TelegramIcon, TwitterIcon } from '@/components/icons';
 
 const LinkedInCustom = () => (
   <img
