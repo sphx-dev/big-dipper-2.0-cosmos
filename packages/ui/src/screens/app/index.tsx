@@ -28,7 +28,7 @@ const SEO_CONFIG = {
     cardType: 'summary_large_image',
   },
   additionalLinkTags: [
-    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', href: '/icons/favicon.ico' },
     { rel: 'canonical', href: SPHINX_CONFIG.url },
   ],
   additionalMetaTags: [
