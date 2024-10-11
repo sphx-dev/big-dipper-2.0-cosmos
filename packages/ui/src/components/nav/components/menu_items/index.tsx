@@ -33,7 +33,7 @@ const MenuItems = () => {
             className={cx(classes.root, {
               active: isActive,
             })}
-            component="a"
+            component={Link}
           >
             {/* <ListItemIcon>{x.icon}</ListItemIcon> */}
             <ListItemText className={classes.listItemText} primary={t(x.key)} />

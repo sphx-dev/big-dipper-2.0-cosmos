@@ -15,8 +15,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { AppProps } from 'next/app';
 import { Hind_Madurai } from 'next/font/google';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import BigDipperLogoRed from 'shared-utils/assets/big-dipper-red.svg';
 
 const hindMadurai = Hind_Madurai({
   weight: '400',
@@ -77,26 +78,61 @@ const Main = (props: MainProps) => {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      </Head>
-      <ThemeProvider theme={muiTheme}>
-        <CssBaseline />
-        {Component}
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </ThemeProvider>
+      <Dynamic>
+        <Head>
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        </Head>
+        <ThemeProvider theme={muiTheme}>
+          <CssBaseline />
+          {Component}
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+        </ThemeProvider>
+      </Dynamic>
     </CacheProvider>
   );
 };
 
 export default Main;
+
+// Dynamic component to disable SSR
+// Even if a component is marked 'use client', it will still be pre-rendered.
+// https://stackoverflow.com/questions/75406728/how-to-entirely-disable-server-side-rendering-in-next-js-v13
+const Dynamic = ({ children }: { children: React.ReactNode }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          minWidth: '70vw',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <BigDipperLogoRed style={{ width: '300px' }} />
+      </div>
+    );
+  }
+
+  return <>{children}</>;
+};

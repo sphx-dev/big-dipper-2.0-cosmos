@@ -1,6 +1,5 @@
 import AppBar from '@mui/material/AppBar';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Drawer from '@mui/material/Drawer';
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 import BigDipperLogoRed from 'shared-utils/assets/big-dipper-red.svg';
@@ -11,6 +10,7 @@ import MenuItems from '@/components/nav/components/menu_items';
 import useStyles from '@/components/nav/components/desktop/styles';
 import { useDesktop } from '@/components/nav/components/desktop/hooks';
 import ActionBar from '@/components/nav/components/desktop/components/action_bar';
+import Link from 'next/link';
 
 type DesktopProps = {
   className?: string;
@@ -25,21 +25,23 @@ const Desktop: FC<DesktopProps> = ({ className, title }) => {
     <ClickAwayListener onClickAway={turnOffAll}>
       <AppBar position="relative" className={cx(classes.appBar)}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          {theme === 'light' ? (
-            <BigDipperLogoRed
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-              aria-label="toggle menu"
-            />
-          ) : (
-            <BigDipperLogoWhite
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-              aria-label="toggle menu"
-            />
-          )}
+          <Link href="/">
+            {theme === 'light' ? (
+              <BigDipperLogoRed
+                className={classes.logo}
+                onClick={toggleMenu}
+                role="button"
+                aria-label="toggle menu"
+              />
+            ) : (
+              <BigDipperLogoWhite
+                className={classes.logo}
+                onClick={toggleMenu}
+                role="button"
+                aria-label="toggle menu"
+              />
+            )}
+          </Link>
           <MenuItems />
         </div>
         <ActionBar toggleNetwork={toggleNetwork} isNetwork={isNetwork} />

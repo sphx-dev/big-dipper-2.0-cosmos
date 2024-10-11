@@ -25,6 +25,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   footer: {
+    alignSelf: 'stretch',
     [theme.breakpoints.up('lg')]: {
       position: 'relative',
       zIndex: 1299,
