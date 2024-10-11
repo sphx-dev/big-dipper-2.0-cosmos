@@ -1,105 +1,44 @@
+import { useState } from 'react';
 import * as R from 'ramda';
-import { useState, useEffect, useCallback } from 'react';
-import { convertMsgsToModels } from '@/components/msg/utils';
 import {
-  useMessagesByTypesListenerSubscription,
-  MessagesByTypesListenerSubscription,
-  useMessagesByTypesQuery,
+  useTransactionsQuery,
+  useTransactionsListenerSubscription,
+  TransactionsListenerSubscription,
 } from '@/graphql/types/general_types';
-import type { TransactionsState } from '@/screens/transactions/types';
-import { convertMsgType } from '@/utils/convert_msg_type';
-import { useRecoilValue } from 'recoil';
-import { readFilter } from '@/recoil/transactions_filter';
-
-// This is a bandaid as it can get extremely
-// expensive if there is too much data
-/**
- * Helps remove any possible duplication
- * and sorts by height in case it bugs out
- */
-const uniqueAndSort = R.pipe(
-  R.uniqBy((r: Transactions) => r?.hash),
-  R.sort(R.descend((r) => r?.height))
-);
-
-const formatTransactions = (
-  data: MessagesByTypesListenerSubscription
-): TransactionsState['items'] => {
-  if (!data?.messagesByTypes) return [];
-
-  let formattedData = data.messagesByTypes;
-  if (data.messagesByTypes.length === 51) {
-    formattedData = data.messagesByTypes.slice(0, 51);
-  }
-
-  return formattedData.map((x) => {
-    const messages = convertMsgsToModels(x.transaction);
-    const msgType =
-      x.transaction?.messages?.map((eachMsg: any) => {
-        const eachMsgType = R.pathOr('none type', ['@type'], eachMsg);
-        return eachMsgType ?? '';
-      }) ?? [];
-    const convertedMsgType = convertMsgType(msgType);
-    return {
-      height: x.transaction?.height ?? 0,
-      hash: x.transaction?.hash ?? '',
-      type: convertedMsgType,
-      messages: {
-        count: x.transaction?.messages?.length ?? 0,
-        items: messages,
-      },
-      success: x.transaction?.success ?? false,
-      timestamp: x.transaction?.block?.timestamp ?? '',
-    };
-  });
-};
+// import { convertMsgsToModels } from '@msg';
+import { convertMsgsToModels } from '@/components/msg/utils';
+import { TransactionsState } from './types';
 
 export const useTransactions = () => {
   const [state, setState] = useState<TransactionsState>({
     loading: true,
     exists: true,
     hasNextPage: false,
-    isNextPageLoading: true,
+    isNextPageLoading: false,
     items: [],
   });
-  const msgTypes = useRecoilValue(readFilter);
 
-  const handleSetState = useCallback(
-    (stateChange: (prevState: TransactionsState) => TransactionsState) => {
-      setState((prevState) => {
-        const newState = stateChange(prevState);
-        return R.equals(prevState, newState) ? prevState : newState;
-      });
-    },
-    []
-  );
+  const handleSetState = (stateChange: any) => {
+    setState((prevState) => R.mergeDeepLeft(stateChange, prevState));
+  };
 
-  useEffect(() => {
-    handleSetState((prevState) => ({
-      ...prevState,
-      loading: true,
-      items: [],
-      hasNextPage: false,
-      isNextPageLoading: false,
-    }));
-  }, [handleSetState, msgTypes]);
   // ================================
   // tx subscription
   // ================================
-  useMessagesByTypesListenerSubscription({
+  useTransactionsListenerSubscription({
     variables: {
-      types: msgTypes ?? '{}',
+      limit: 1,
+      offset: 0,
     },
-    onData: (data) => {
-      const newItems = uniqueAndSort([
-        ...(data?.data?.data ? formatTransactions(data.data.data) : []),
-        ...state.items,
-      ]);
-      handleSetState((prevState) => ({
-        ...prevState,
+    onData: (options) => {
+      if (!options?.data?.data) {
+        return;
+      }
+      const newItems = uniqueAndSort([...formatTransactions(options.data.data), ...state.items]);
+      handleSetState({
         loading: false,
         items: newItems,
-      }));
+      });
     },
   });
 
@@ -107,30 +46,32 @@ export const useTransactions = () => {
   // tx query
   // ================================
   const LIMIT = 51;
-  const transactionQuery = useMessagesByTypesQuery({
+  const transactionQuery = useTransactionsQuery({
     variables: {
       limit: LIMIT,
       offset: 1,
-      types: msgTypes ?? '{}',
     },
     onError: () => {
-      handleSetState((prevState) => ({ ...prevState, loading: false }));
+      handleSetState({
+        loading: false,
+      });
     },
     onCompleted: (data) => {
-      const itemsLength = data.messagesByTypes.length;
-      const newItems = uniqueAndSort([...state.items, ...(formatTransactions(data) ?? [])]);
-      handleSetState((prevState) => ({
-        ...prevState,
+      const itemsLength = data.transactions.length;
+      const newItems = uniqueAndSort([...state.items, ...formatTransactions(data)]);
+      handleSetState({
         loading: false,
         items: newItems,
         hasNextPage: itemsLength === 51,
         isNextPageLoading: false,
-      }));
+      });
     },
   });
 
   const loadNextPage = async () => {
-    handleSetState((prevState) => ({ ...prevState, isNextPageLoading: true }));
+    handleSetState({
+      isNextPageLoading: true,
+    });
     // refetch query
     await transactionQuery
       .fetchMore({
@@ -140,14 +81,14 @@ export const useTransactions = () => {
         },
       })
       .then(({ data }) => {
-        const itemsLength = data?.messagesByTypes.length;
-        const newItems = uniqueAndSort([...state.items, ...(formatTransactions(data) ?? [])]);
-        handleSetState((prevState) => ({
-          ...prevState,
+        const itemsLength = data.transactions.length;
+        const newItems = uniqueAndSort([...state.items, ...formatTransactions(data)]);
+        // set new state
+        handleSetState({
           items: newItems,
           isNextPageLoading: false,
           hasNextPage: itemsLength === 51,
-        }));
+        });
       });
   };
 
@@ -155,4 +96,44 @@ export const useTransactions = () => {
     state,
     loadNextPage,
   };
+};
+
+// This is a bandaid as it can get extremely
+// expensive if there is too much data
+/**
+ * Helps remove any possible duplication
+ * and sorts by height in case it bugs out
+ */
+// const uniqueAndSort = R.pipe(R.uniqBy(R.prop('hash')), R.sort(R.descend(R.prop('height'))));
+const uniqueAndSort = function (arr: any[]) {
+  const hashMap = new Map();
+  const uniqueArr = arr.filter((item, index) => {
+    if (hashMap.has(item.hash)) {
+      return false;
+    }
+    hashMap.set(item.hash, true);
+    return true;
+  });
+  return uniqueArr.toSorted((a, b) => b.height - a.height);
+};
+
+const formatTransactions = (data: TransactionsListenerSubscription) => {
+  let formattedData = data.transactions;
+  if (data.transactions.length === 51) {
+    formattedData = data.transactions.slice(0, 51);
+  }
+
+  return formattedData.map((x) => {
+    const messages = convertMsgsToModels(x);
+    return {
+      height: x.height,
+      hash: x.hash,
+      messages: {
+        count: x.messages.length,
+        items: messages,
+      },
+      success: x.success,
+      timestamp: x.block.timestamp,
+    };
+  });
 };

@@ -68,9 +68,9 @@ export const Icon = () => {
           y2="7.18036"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#137DBE"></stop>
-          <stop offset="0.44" stop-color="#0AAAA1"></stop>
-          <stop offset="0.9" stop-color="#12DDE0"></stop>
+          <stop stopColor="#137DBE"></stop>
+          <stop offset="0.44" stopColor="#0AAAA1"></stop>
+          <stop offset="0.9" stopColor="#12DDE0"></stop>
         </linearGradient>
         <linearGradient
           id="paint1_linear_83_179"
@@ -80,9 +80,9 @@ export const Icon = () => {
           y2="16.9878"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#137DBE"></stop>
-          <stop offset="0.44" stop-color="#0AAAA1"></stop>
-          <stop offset="0.9" stop-color="#12DDE0"></stop>
+          <stop stopColor="#137DBE"></stop>
+          <stop offset="0.44" stopColor="#0AAAA1"></stop>
+          <stop offset="0.9" stopColor="#12DDE0"></stop>
         </linearGradient>
         <linearGradient
           id="paint2_linear_83_179"
@@ -92,9 +92,9 @@ export const Icon = () => {
           y2="24.737"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#137DBE"></stop>
-          <stop offset="0.44" stop-color="#0AAAA1"></stop>
-          <stop offset="0.9" stop-color="#12DDE0"></stop>
+          <stop stopColor="#137DBE"></stop>
+          <stop offset="0.44" stopColor="#0AAAA1"></stop>
+          <stop offset="0.9" stopColor="#12DDE0"></stop>
         </linearGradient>
         <linearGradient
           id="paint3_linear_83_179"
@@ -104,9 +104,9 @@ export const Icon = () => {
           y2="24.6873"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#137DBE"></stop>
-          <stop offset="0.44" stop-color="#0AAAA1"></stop>
-          <stop offset="0.9" stop-color="#12DDE0"></stop>
+          <stop stopColor="#137DBE"></stop>
+          <stop offset="0.44" stopColor="#0AAAA1"></stop>
+          <stop offset="0.9" stopColor="#12DDE0"></stop>
         </linearGradient>
       </defs>
     </svg>
