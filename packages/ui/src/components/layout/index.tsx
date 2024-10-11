@@ -1,6 +1,6 @@
 import { motion, Transition, Variants } from 'framer-motion';
 import Banner, { getBannersLinks } from '@/components/banner';
-import Footer from '@/components/footer';
+import FooterSphx from '@/components/footer_sphx';
 import useStyles from '@/components/layout/styles';
 import type { LayoutProps } from '@/components/layout/types';
 import Nav from '@/components/nav';
@@ -38,7 +38,7 @@ const Layout = (props: LayoutProps) => {
           <div className={cx(className, 'main-content')}>{children}</div>
         </div>
       </div>
-      <Footer className={classes.footer} />
+      <FooterSphx className={classes.footer} />
     </motion.div>
   );
 };

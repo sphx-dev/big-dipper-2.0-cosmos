@@ -1,3 +1,4 @@
+export { default as DiscordIcon } from '@/components/icons/discord';
 export { default as FacebookIcon } from '@/components/icons/facebook';
 export { default as ForboleIcon } from '@/components/icons/forbole';
 export { default as GithubIcon } from '@/components/icons/github';
