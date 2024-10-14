@@ -7,10 +7,12 @@ import BigDipperLogoWhite from 'shared-utils/assets/big-dipper-white.svg';
 import { readTheme } from '@/recoil/settings';
 import TitleBar from '@/components/nav/components/title_bar';
 import MenuItems from '@/components/nav/components/menu_items';
+import MenuItemsMobile from '@/components/nav/components/menu_items_mobile';
 import useStyles from '@/components/nav/components/desktop/styles';
 import { useDesktop } from '@/components/nav/components/desktop/hooks';
 import ActionBar from '@/components/nav/components/desktop/components/action_bar';
 import Link from 'next/link';
+import { useDisplayStyles } from '@/styles/useSharedStyles';
 
 type DesktopProps = {
   className?: string;
@@ -20,6 +22,7 @@ type DesktopProps = {
 const Desktop: FC<DesktopProps> = ({ className, title }) => {
   const { classes, cx } = useStyles();
   const theme = useRecoilValue(readTheme);
+  const display = useDisplayStyles().classes;
   const { isMenu, toggleMenu, turnOffAll, toggleNetwork, isNetwork } = useDesktop();
   return (
     <ClickAwayListener onClickAway={turnOffAll}>
@@ -42,7 +45,8 @@ const Desktop: FC<DesktopProps> = ({ className, title }) => {
               />
             )}
           </Link>
-          <MenuItems />
+          <MenuItems className={display.hiddenUntilMd} />
+          <MenuItemsMobile className={display.hiddenWhenMd} />
         </div>
         <ActionBar toggleNetwork={toggleNetwork} isNetwork={isNetwork} />
         <TitleBar title={title} />

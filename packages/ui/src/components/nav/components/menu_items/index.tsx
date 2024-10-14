@@ -9,14 +9,14 @@ import { getMenuItems } from '@/components/nav/components/menu_items/utils';
 import useStyles from '@/components/nav/components/menu_items/styles';
 import { Toolbar } from '@mui/material';
 
-const MenuItems = () => {
+const MenuItems = ({ className }: { className?: string }) => {
   const { classes, cx } = useStyles();
   const router = useRouter();
   const { t } = useAppTranslation('common');
   const items = getMenuItems();
 
   return (
-    <Toolbar className={classes.toolbar}>
+    <Toolbar className={cx(className, classes.toolbar)}>
       {items?.map((x) => {
         let isActive = false;
         if (x.url === router?.asPath) {
