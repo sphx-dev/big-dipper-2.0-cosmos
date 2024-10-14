@@ -12,7 +12,7 @@ const useStyles = makeStyles()((theme) => ({
     // },
   },
   contentWrapper: {
-    padding: '2rem',
+    padding: '0 2rem 2rem',
     width: '100%',
     [theme.breakpoints.up('md')]: {
       maxWidth: '840px',
