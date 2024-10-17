@@ -16,10 +16,9 @@ function chainConfig() {
   if (!chain) [chain] = chains;
   if (!chain) throw new Error(`Config not found for CHAIN_NAME ${chainJson.chainName}`);
 
-  const basePath = (process.env.BASE_PATH || `${`/${settings.chainName}`}`).replace(
-    /^(\/|\/base)$/,
-    ''
-  );
+  // `/${settings.chainName} -> /sphinx`
+  // now just `/`
+  const basePath = (process.env.BASE_PATH || `${`/`}`).replace(/^(\/|\/base)$/, '');
 
   /* Merging the settings and chain objects. */
   return {
