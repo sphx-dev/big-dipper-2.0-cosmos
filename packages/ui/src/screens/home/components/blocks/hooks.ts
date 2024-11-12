@@ -39,7 +39,10 @@ export const useBlocks = () => {
       handleSetState((prevState) => ({
         ...prevState,
         loading: false,
-        items: data.data.data ? formatBlocks(data.data.data) : [],
+        items: mergeByHeight(
+          data.data.data ? formatBlocks(data.data.data) : [],
+          prevState.items
+        ).slice(0, 15),
       }));
     },
   });
@@ -48,3 +51,7 @@ export const useBlocks = () => {
     state,
   };
 };
+
+function mergeByHeight(blocks: BlocksState['items'], newBlocks: BlocksState['items']) {
+  return R.uniqBy(R.prop('height'), [...blocks, ...newBlocks]);
+}

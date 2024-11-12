@@ -16,6 +16,7 @@ import useAppTranslation from '@/hooks/useAppTranslation';
 import Link from 'next/link';
 import numeral from 'numeral';
 import { FC } from 'react';
+import styled from '@emotion/styled';
 
 type BlockRowProps = {
   item: ItemType;
@@ -48,6 +49,18 @@ const variants: Variants = {
   },
 };
 
+const comeDownVariants: Variants = {
+  initial: {
+    top: -375,
+  },
+  animate: {
+    top: 0,
+  },
+  exit: {
+    top: 0,
+  },
+};
+
 const BlockRow: FC<BlockRowProps> = ({ item }) => {
   const { name, address, imageUrl } = useProfileRecoil(item.proposer);
 
@@ -71,22 +84,21 @@ const BlockRow: FC<BlockRowProps> = ({ item }) => {
         const { key, align } = column;
         return (
           <TableCell key={`${item.hash}-${key}`} align={align}>
-            <motion.div
-              key={`${item.hash}-${key}`}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={variants}
-              transition={{ duration: 1.5 }}
-            >
-              {formattedData[key as keyof typeof formattedData]}
-            </motion.div>
+            <CellDataWrapper>{formattedData[key as keyof typeof formattedData]}</CellDataWrapper>
           </TableCell>
         );
       })}
     </TableRow>
   );
 };
+
+const CellDataWrapper = styled.div`
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+`;
 
 type DesktopProps = {
   className?: string;
@@ -98,9 +110,15 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
   const { classes, cx } = useStyles();
 
   return (
-    <div className={cx(classes.root, className)}>
-      <Table className={classes.table}>
-        <TableHead>
+    <div className={cx(classes.root, className)} style={{ overflow: 'auto hidden' }}>
+      <Table
+        className={classes.table}
+        style={{
+          display: 'block',
+          height: '350px',
+        }}
+      >
+        <TableHead style={{ zIndex: 10, backgroundColor: 'white', position: 'relative' }}>
           <TableRow>
             {columns.map((column) => (
               <TableCell key={column.key} align={column.align}>
@@ -109,13 +127,19 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
             ))}
           </TableRow>
         </TableHead>
-        <TableBody>
-          <AnimatePresence initial={false}>
-            {items.map((row) => (
-              <BlockRow key={row.hash} item={row} />
-            ))}
-          </AnimatePresence>
-        </TableBody>
+        <motion.tbody
+          style={{ position: 'relative', zIndex: 1 }}
+          key={items.map((x) => x.hash).join('')}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={comeDownVariants}
+          transition={{ duration: 1.5 }}
+        >
+          {items.map((row) => (
+            <BlockRow key={row.hash} item={row} />
+          ))}
+        </motion.tbody>
       </Table>
     </div>
   );
