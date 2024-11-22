@@ -14,6 +14,7 @@ const useStyles = makeStyles()((theme) => ({
   contentWrapper: {
     padding: '0 2rem 2rem',
     width: '100%',
+    flex: '1 1 auto',
     [theme.breakpoints.up('md')]: {
       maxWidth: '840px',
     },
