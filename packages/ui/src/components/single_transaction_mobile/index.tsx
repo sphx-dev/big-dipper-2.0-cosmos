@@ -10,6 +10,7 @@ type SingleTransactionMobileProps = {
   time: ReactNode;
   messages: ReactNode;
   result?: ReactNode;
+  type?: ReactNode;
 };
 
 const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
@@ -19,6 +20,7 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
   time,
   messages,
   result,
+  type,
 }) => {
   const { t } = useAppTranslation('transactions');
   const { classes, cx } = useStyles();
@@ -40,6 +42,14 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
         </Typography>
       </div>
       <div className={classes.flex}>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('type')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {type}
+          </Typography>
+        </div>
         {!!messages && (
           <div className={classes.item}>
             <Typography variant="h4" className="label">
