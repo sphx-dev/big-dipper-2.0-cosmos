@@ -68,7 +68,11 @@ const Desktop: FC<TransactionsListState> = ({
     ),
     type: (
       <div>
-        <Tag value={x.type?.[0] ?? ''} theme="six" />
+        {x.type?.[0] ? (
+          <Tag value={x.type?.[0] ?? ''} theme="six" />
+        ) : (
+          <Tag value={getTypeFromMessages(x)} theme="six" />
+        )}
         {x.messages.count > 1 && ` + ${x.messages.count - 1}`}
       </div>
     ),
@@ -184,3 +188,14 @@ const Desktop: FC<TransactionsListState> = ({
 };
 
 export default Desktop;
+
+export function getTypeFromMessages(x: Transactions): string {
+  const msgTypeParts = x?.messages?.items?.[0].type?.split('.');
+  const msgType = msgTypeParts[msgTypeParts.length - 1]?.replace('Msg', '');
+  return insertSpaceBeforeCapitalLetter(msgType ?? '');
+}
+
+// this method inserts a spece before each capital letter in a string
+function insertSpaceBeforeCapitalLetter(str: string) {
+  return str.replace(/([A-Z])/g, ' $1').trim();
+}

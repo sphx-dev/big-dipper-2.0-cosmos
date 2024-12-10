@@ -16,6 +16,7 @@ import { FC } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { ListChildComponentProps, VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
+import { getTypeFromMessages } from '../desktop';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -59,7 +60,7 @@ const ListItem: FC<ListItemProps> = ({
     ),
     type: (
       <div>
-        <Tag value={transaction.type?.[0] ?? ''} theme="six" />
+        <Tag value={transaction.type?.[0] ?? getTypeFromMessages(transaction)} theme="six" />
         {transaction.messages.count > 1 && ` + ${transaction.messages.count - 1}`}
       </div>
     ),
