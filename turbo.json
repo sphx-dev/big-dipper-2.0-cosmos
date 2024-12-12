@@ -32,13 +32,8 @@
   ],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**"
-      ],
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"],
       "env": [
         "NEXT_PUBLIC_BANNERS_JSON",
         "NEXT_PUBLIC_COINZILLA_ZONE",
@@ -59,12 +54,8 @@
       "persistent": true
     },
     "start": {
-      "dependsOn": [
-        "^build"
-      ],
-      "env": [
-        "PORT"
-      ],
+      "dependsOn": ["^build"],
+      "env": ["PORT"],
       "outputs": [],
       "persistent": true
     },
@@ -72,19 +63,13 @@
       "outputs": []
     },
     "lint": {
-      "outputs": [
-        ".next/cache/eslint/**"
-      ]
+      "outputs": [".next/cache/eslint/**"]
     },
     "test": {
-      "outputs": [
-        "coverage/**"
-      ]
+      "outputs": ["coverage/**"]
     },
     "e2e": {
-      "env": [
-        "PORT"
-      ],
+      "env": ["PORT"],
       "outputs": []
     },
     "graphql:codegen": {

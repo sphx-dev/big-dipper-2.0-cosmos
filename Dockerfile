@@ -73,9 +73,12 @@ RUN export SENTRYCLI_SKIP_DOWNLOAD=$([ -z "${NEXT_PUBLIC_SENTRY_DSN}" ] && echo 
   && yarn install --inline-builds
 
 ## Build the project
-RUN ([ -z "${NEXT_PUBLIC_SENTRY_DSN}" ] || yarn node packages/shared-utils/configs/sentry/install.js) \
-  && yarn workspace ${PROJECT_NAME} add sharp \
-  && yarn workspace ${PROJECT_NAME} run build
+# RUN ([ -z "${NEXT_PUBLIC_SENTRY_DSN}" ] || yarn node packages/shared-utils/configs/sentry/install.js) \
+#   && yarn workspace ${PROJECT_NAME} add sharp \
+#   && yarn workspace ${PROJECT_NAME} run build
+
+COPY . .
+RUN yarn build
 
 ################################################################################
 
@@ -95,19 +98,24 @@ RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs \
   && chown -R nextjs:nodejs /home/nextjs /app
 
-COPY --chown=nextjs:nodejs --from=builder \
-  /app/package.json /app/.pnp.* /app/.yarnrc.yml /app/yarn.lock \
-  ../../
-COPY --chown=nextjs:nodejs --from=builder \
-  /app/.yarn/ \
-  ../../.yarn/
-COPY --chown=nextjs:nodejs --from=builder \
-  /app/apps/${PROJECT_NAME}/ /app/apps/${PROJECT_NAME}/ \
-  ./
-COPY --chown=nextjs:nodejs --from=builder \
-  /app/packages/ /app/packages/
+# COPY --chown=nextjs:nodejs --from=builder \
+#   /app/package.json /app/.pnp.* /app/.yarnrc.yml /app/yarn.lock \
+#   ../../
+# COPY --chown=nextjs:nodejs --from=builder \
+#   /app/.yarn/ \
+#   ../../.yarn/
+# COPY --chown=nextjs:nodejs --from=builder \
+#   /app/apps/${PROJECT_NAME}/ /app/apps/${PROJECT_NAME}/ \
+#   ./
+# COPY --chown=nextjs:nodejs --from=builder \
+#   /app/packages/ /app/packages/
+
+WORKDIR /
+COPY --chown=nextjs:nodejs --from=builder /app /app
+
 
 # Don't run production as root
 USER nextjs
+WORKDIR /app/apps/${PROJECT_NAME}
 
 CMD yarn next start -p ${PORT}
