@@ -4,6 +4,7 @@ import FooterSphx from '@/components/footer_sphx';
 import useStyles from '@/components/layout/styles';
 import type { LayoutProps } from '@/components/layout/types';
 import Nav from '@/components/nav';
+import { Wall } from '../wall';
 
 const bannerLinks = getBannersLinks();
 
@@ -22,24 +23,27 @@ const Layout = (props: LayoutProps) => {
   const { children, navTitle, className } = props;
 
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={variants}
-      transition={transition}
-      className={classes.root}
-    >
-      <div className={classes.contentWrapper}>
-        <Nav title={navTitle} />
-        <div className={classes.children}>
-          <div className={classes.appBarPlaceholder} />
-          {!!bannerLinks.length && <Banner />}
-          <div className={cx(className, 'main-content')}>{children}</div>
+    <>
+      <Wall />
+      <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={variants}
+        transition={transition}
+        className={classes.root}
+      >
+        <div className={classes.contentWrapper}>
+          <Nav title={navTitle} />
+          <div className={classes.children}>
+            <div className={classes.appBarPlaceholder} />
+            {!!bannerLinks.length && <Banner />}
+            <div className={cx(className, 'main-content')}>{children}</div>
+          </div>
         </div>
-      </div>
-      <FooterSphx className={classes.footer} />
-    </motion.div>
+        <FooterSphx className={classes.footer} />
+      </motion.div>
+    </>
   );
 };
 
